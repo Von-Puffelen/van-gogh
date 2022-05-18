@@ -1,18 +1,20 @@
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
+CFLAGS	= -std=c11
+CFLAGS += -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
 CFLAGS += -Wno-undef-prefix
-LDLIBS 	=
+CFLAGS += `sdl2-config --cflags`
+LDFLAGS	= `sdl2-config --libs`
 
 BIN 	= ../bin
-OUT 	= ${BIN}/app
+OUT 	= ${BIN}/"Van Gogh"
 
-SRCS 	= main.c
+SRCS 	= main.c window.c
 OBJS 	= $(SRCS:%.c=%.o)
 
 default: $(OUT)
 
 $(OUT): $(OBJS)
-	${CC} ${CFLAGS} ${OBJS} -o ${OUT} 
+	${CC} ${CFLAGS} ${LDFLAGS} ${OBJS} -o ${OUT} 
 
 %.o: %.c
 	${CC} ${CFLAGS} -c $^

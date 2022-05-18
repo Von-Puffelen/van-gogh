@@ -1,4 +1,4 @@
-OUT 	= app
+OUT 	= "Van Gogh" 
 BIN 	= ./bin
 SRC 	= ./src
 

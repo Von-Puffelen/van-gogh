@@ -1,5 +1,15 @@
 18-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Created a SDL2 window and added clang database
+
+        * main.c (main): Added game loop for window.
+        * window.c/.h (gogh_initialize_window, gogh_close_window): Added the creation and
+        deletion of the game window.
+        * defines.h: Added for easier configurations.
+        * compile_commands.json: Added database for clang.
+
+18-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Swapped Cmake for a simpeler make configuration.
 
         * Makefile: added as build automation tool.
