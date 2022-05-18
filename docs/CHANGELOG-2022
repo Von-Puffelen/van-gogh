@@ -1,3 +1,10 @@
+18-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Swapped Cmake for a simpeler make configuration.
+
+        * Makefile: added as build automation tool.
+        * .gitignore: removed Cmake ignore files.
+
 12-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Initial commit for the project van gogh.

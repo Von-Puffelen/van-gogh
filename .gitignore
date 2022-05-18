@@ -21,23 +21,3 @@ bin/
 ## Object files
 *.o
 *.obj
-
-
-# Cmake
-
-## Directores
-CMakeFiles
-Testing
-CMakeScripts
-
-## Files
-CMakeCache.txt
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-
-# Others
-CMakeLists.txt.user
-_deps
