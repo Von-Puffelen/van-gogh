@@ -1,5 +1,11 @@
 19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added first component to the renderer (aka rectangle).
+
+        * src/main.c (main) Added rectangle.
+
+19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Added a renderer to the window component.
 
         * src/main.c (main): Refactor code including window and renderer.
