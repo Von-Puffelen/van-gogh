@@ -1,5 +1,0 @@
-
-#define GOGH_APPLICATION_NAME "Application"
-
-#define GOGH_WINDOW_WIDTH 1280
-#define GOGH_WINDOW_HEIGHT 720
