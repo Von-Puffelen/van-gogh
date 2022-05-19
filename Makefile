@@ -1,27 +1,41 @@
-OUT 	= "Van Gogh" 
-BIN 	= ./bin
-SRC 	= ./src
+BIN = ./bin
+LIB = ./lib
+SRC = ./src
 
-GREEN 	= "\033[0;32m"
-YELLOW 	= "\033[1;33m"
-NO_COLOUR  = "\033[0m"
+CC       = gcc
+CFLAGS   = -std=c11
+CFLAGS  += -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
+CFLAGS  += -Wno-undef-prefix `pkg-config sdl2 --cflags`
 
-all: build start
+LDLIBS  += -L ${LIB}
+LDFLAGS += `pkg-config sdl2 --libs`
+
+TARGET  = ${BIN}/app
+
+SRCS    = $(wildcard $(SRC)/*.c)
+OBJS    = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
+
+all: $(TARGET) start
 default: all
 
-start:
-	@echo ${GREEN}==== EXECUTING APPLICATION ==========================================
-	@echo ${NO_COLOUR}
-	@${BIN}/${OUT}
+$(TARGET): $(OBJS)
+	@echo "=== Linking... ============================================================"
+	$(CC) $^ -o $(TARGET) $(LDFLAGS) -O3
 
-build:
-	@echo ${GREEN}==== BUILDING APPLICATION ===========================================
-	@mkdir -p ${BIN}
-	@+$(MAKE) -C ${SRC}
+$(BIN)/%.o: $(SRC)/%.c
+	@echo "\033[1;33m"
+	@echo "=== Building... ==========================================================="
+	@mkdir -p $(BIN)
+	$(CC) $(CFLAGS) -c -o $@ $< -O3
+
+start:
+	@echo "\033[0;32m"
+	@echo "=== Executing... =========================================================="
+	@echo "\033[0m" 
+	@$(TARGET)
 
 clean:
-	@echo ${YELLOW}==== PURGING APPLICATION ============================================
-	@rm -rfv ${SRC}/*.o 
-	@rm -rfv ${BIN}
+	@echo "=== Cleaning... ==========================================================="
+	@rm -rfv $(BIN) $(TARGET)
 
-.PHONY: start build clean
+.PHONY: start clean

@@ -1,11 +1,19 @@
+19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Refactor of the Makefile, it was outdated from an older project I have done.
+
+        * src/Makefile: removed in favor of a single makefile.
+        * Makefile: Added all the compile commands to root level makefile.
+        * .gitignore: Added .DS_Store file on macOS.
+
 18-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Created a SDL2 window and added clang database
 
-        * main.c (main): Added game loop for window.
-        * window.c/.h (gogh_initialize_window, gogh_close_window): Added the creation and
-        deletion of the game window.
-        * defines.h: Added for easier configurations.
+        * src/main.c (main): Added game loop for window.
+        * src/window.c/.h (gogh_initialize_window, gogh_close_window): Added the creation
+        and deletion of the game window.
+        * src/defines.h: Added for easier configurations.
         * compile_commands.json: Added database for clang.
 
 18-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
