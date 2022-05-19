@@ -1,5 +1,16 @@
 19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added a renderer to the window component.
+
+        * src/main.c (main): Refactor code including window and renderer.
+        * src/renderer.c (gogh_initialize_renderer, gogh_destory_renderer): Added
+        renderer game loop.
+        * src/window.c (gogh_initialize_window, gogh_destory_window): Refactor code
+        to include the entire application struct.
+        * src/defines.h: Added back because flycheck doesnt work with me on emacs.
+
+19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Added README.md and removed compile_commands.josn
 
         * README.md: Added description, license, installation and acknowledgments.
