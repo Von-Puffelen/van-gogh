@@ -1,18 +1,12 @@
-#include <stdio.h>
-#include <SDL2/SDL.h>
-
+#include "defines.h"
 #include "window.h"
-
-struct Application {
-    SDL_Window *gogh_window;
-    SDL_Surface *gogh_window_surface;
-};
+#include "renderer.h"
 
 int main() {
 
-    struct Application app = {
+    struct goghApplication application = {
         .gogh_window = NULL,
-        .gogh_window_surface = NULL
+        .gogh_renderer = NULL
     };
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -20,25 +14,24 @@ int main() {
         return 0;
     }
 
-    SDL_SetHint(SDL_HINT_VIDEO_HIGHDPI_DISABLED, "0");
-    SDL_GL_SetAttribute (SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE); //OpenGL core profile
-    SDL_GL_SetAttribute (SDL_GL_CONTEXT_MAJOR_VERSION, 3); //OpenGL 3+
-    SDL_GL_SetAttribute (SDL_GL_CONTEXT_MINOR_VERSION, 3); //OpenGL 3.3
+    gogh_initialize_window(&application);
 
-    if (gogh_initialize_window(app.gogh_window)) {
-        printf("- window.c: Cannot initialize SDLWindow, error: %s\n",
-               SDL_GetError());
+    if (application.gogh_window == NULL) {
+        printf("- window.c: Cannot initialize SDLWindow, error: %s\n", SDL_GetError());
         return 0;
     }
 
-    app.gogh_window_surface = SDL_GetWindowSurface(app.gogh_window);
+    gogh_initialize_renderer(&application);
 
-    if (app.gogh_window_surface == NULL) {
-        printf("- main.c: Cannot get the window surface, error: %s\n",
-               SDL_GetError());
+    if (application.gogh_renderer == NULL) {
+        printf("- main.c: Cannot create renderer, error: %s\n", SDL_GetError());
+        return 0;
     }
-    
-    SDL_UpdateWindowSurface(app.gogh_window);
+        
+    SDL_SetRenderDrawColor(application.gogh_renderer, 0x1C, 0x1C, 0x20, 0xFF);
+    SDL_RenderClear(application.gogh_renderer);
+
+    SDL_RenderPresent(application.gogh_renderer);
 
     SDL_Event event;
     int exit = 0;
@@ -50,10 +43,9 @@ int main() {
         }
     }
 
-    SDL_FreeSurface(app.gogh_window_surface);
+    gogh_destroy_window(&application);
+    gogh_destroy_renderer(&application);
     
-    gogh_close_window(app.gogh_window);
-
     SDL_Quit();
 
     return 0;

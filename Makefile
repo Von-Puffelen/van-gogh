@@ -10,7 +10,7 @@ CFLAGS  += -Wno-undef-prefix `pkg-config sdl2 --cflags`
 LDLIBS  += -L ${LIB}
 LDFLAGS += `pkg-config sdl2 --libs`
 
-TARGET  = ${BIN}/app
+TARGET  = ${BIN}/"Van Gogh"
 
 SRCS    = $(wildcard $(SRC)/*.c)
 OBJS    = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
