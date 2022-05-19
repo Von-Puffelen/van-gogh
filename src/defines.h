@@ -2,6 +2,7 @@
 #define _DEFINES_H__
 
 #include <stdio.h>
+#include <stdint.h>
 #include <SDL2/SDL.h>
 
 #define GOGH_APPLICATION_NAME "Application"
@@ -12,6 +13,10 @@
 struct goghApplication {
     SDL_Window *gogh_window;
     SDL_Renderer *gogh_renderer;
+};
+
+struct goghMovableObject {
+    int up, right, down, left;
 };
 
 #endif // _DEFINES_h__
