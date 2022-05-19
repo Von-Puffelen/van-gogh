@@ -1,5 +1,12 @@
 19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added README.md and removed compile_commands.josn
+
+        * README.md: Added description, license, installation and acknowledgments.
+        * .gitignore: Added compile_commands.json.
+
+19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Small changes done to the window management.
 
         * src/defines.h: removed for visability.
