@@ -1,6 +1,9 @@
 #include "defines.h"
 #include "window.h"
 #include "renderer.h"
+#include "keyboard.h"
+
+#include "geometry.h"
 
 int main() {
 
@@ -27,30 +30,39 @@ int main() {
         printf("- main.c: Cannot create renderer, error: %s\n", SDL_GetError());
         return 0;
     }
+
+    struct goghMovableObject player = {0, 0, 0, 0};
+
+    int circle_size = 70;
+    int x = GOGH_WINDOW_WIDTH;
+    int y = GOGH_WINDOW_HEIGHT - (circle_size / 2);
+
+    while(1) {
+
+        SDL_SetRenderDrawColor(application.gogh_renderer, 0xF2, 0xF2, 0xf7, 0xFF);		
+        SDL_RenderClear(application.gogh_renderer);
+
+        gogh_input(&player);
+
+        if (player.up)
+            y -= 20;
+            
+        if (player.right)
+            x += 20;
+
+        if (player.down)
+            y += 20;
+
+        if (player.left)
+            x -= 20;
+
+        SDL_SetRenderDrawColor(application.gogh_renderer, 0x1C, 0x1C, 0x20, 0xFF);
+        gogh_draw_circle(&application, x, y, circle_size);
+        gogh_fill_circle(&application, x, y, circle_size);
         
-    SDL_SetRenderDrawColor(application.gogh_renderer, 0xF2, 0xF2, 0xf7, 0xFF);		
-    SDL_RenderClear(application.gogh_renderer);
+        SDL_RenderPresent(application.gogh_renderer);
 
-    int box_size = 350;
-
-    SDL_FRect fill = {
-        GOGH_WINDOW_WIDTH - (box_size / 2), GOGH_WINDOW_HEIGHT - (box_size / 2),
-        box_size, box_size 
-    };
-    
-    SDL_SetRenderDrawColor(application.gogh_renderer, 0x1C, 0x1C, 0x20, 0xFF);
-    SDL_RenderFillRectF(application.gogh_renderer, &fill);
-    
-    SDL_RenderPresent(application.gogh_renderer);
-
-    SDL_Event event;
-    int exit = 0;
-
-    while(!exit) {
-        while(SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT)
-                exit = 1;
-        }
+        SDL_Delay(16);
     }
 
     gogh_destroy_window(&application);

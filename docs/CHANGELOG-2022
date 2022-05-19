@@ -1,5 +1,14 @@
 19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added input from keyboard with the arrow keys/
+
+        * src/keyboard.c (gogh_input, gogh_on_key_down_event, gogh_on_key_up_event):
+        Added key up and down events, with a general input function.
+        * src/main.c (main): Added a circle player with keyboard controls, and a better
+        game loop for the window and renderer.
+
+19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Added more geometry to render (aka circle).
 
         * src/geometry.c (gogh_draw_circle, gogh_fill_circle): Added the circle with
