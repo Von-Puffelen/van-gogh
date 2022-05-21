@@ -37,6 +37,9 @@ void gogh_on_key_down_event(SDL_KeyboardEvent *event, struct goghMovableObject *
 
         if (event->keysym.scancode == SDL_SCANCODE_LEFT)
             obj->left = 1;
+
+        if (event->keysym.scancode == SDL_SCANCODE_ESCAPE)
+            exit(0);
     }
 }
 

@@ -1,5 +1,15 @@
 21-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Fixed bug where the drawing of the circle's fill would worsen when the size
+        of the circle increased.
+
+        * src/geometry/geometry.c (gogh_draw_circle): Added filling code, and removed the
+        (gogh_draw_filling) function.
+        * src/input/keyboard.c (gogh_on_key_down_event): Added ESCAPE key to shutting down.
+        * src/main.c (main): Added player speed, and small fixes.
+
+21-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Project restructure, differentiate public from private headers and added
         sub-directories for visability.
 

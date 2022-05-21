@@ -32,8 +32,9 @@ int main() {
     }
 
     struct goghMovableObject player = {0, 0, 0, 0};
+    int player_speed = 10;
 
-    int circle_size = 70;
+    int circle_size = 30;
     int x = GOGH_WINDOW_WIDTH;
     int y = GOGH_WINDOW_HEIGHT - (circle_size / 2);
 
@@ -45,20 +46,20 @@ int main() {
         gogh_input(&player);
 
         if (player.up)
-            y -= 20;
+            y -= player_speed;
             
         if (player.right)
-            x += 20;
+            x += player_speed;
 
         if (player.down)
-            y += 20;
+            y += player_speed;
 
         if (player.left)
-            x -= 20;
+            x -= player_speed;
 
         SDL_SetRenderDrawColor(application.gogh_renderer, 0x1C, 0x1C, 0x20, 0xFF);
+
         gogh_draw_circle(&application, x, y, circle_size);
-        gogh_fill_circle(&application, x, y, circle_size);
         
         SDL_RenderPresent(application.gogh_renderer);
 
