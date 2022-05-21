@@ -3,7 +3,7 @@
         Project restructure, differentiate public from private headers and added
         sub-directories for visability.
 
-        
+        * src/*: Changed include for public headers, and moved it to a new directory.
 
 19-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
