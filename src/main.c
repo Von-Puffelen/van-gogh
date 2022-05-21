@@ -1,9 +1,9 @@
-#include "defines.h"
-#include "window.h"
-#include "renderer.h"
-#include "keyboard.h"
+#include "GOGH/defines.h"
 
-#include "geometry.h"
+#include "window.h"
+#include "renderer/renderer.h"
+#include "input/keyboard.h"
+#include "geometry/geometry.h"
 
 int main() {
 
@@ -39,7 +39,7 @@ int main() {
 
     while(1) {
 
-        SDL_SetRenderDrawColor(application.gogh_renderer, 0xF2, 0xF2, 0xf7, 0xFF);		
+        SDL_SetRenderDrawColor(application.gogh_renderer, 0xF2, 0xF2, 0xf7, 0xFF);	
         SDL_RenderClear(application.gogh_renderer);
 
         gogh_input(&player);

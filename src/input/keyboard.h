@@ -1,8 +1,7 @@
 #ifndef _KEYBOARD_H__
 #define _KEYBOARD_H__
 
-#include <SDL2/SDL.h>
-#include "defines.h"
+#include "GOGH/defines.h"
 
 void gogh_input(struct goghMovableObject *obj);
 
