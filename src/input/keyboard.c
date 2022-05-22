@@ -1,6 +1,6 @@
 #include "keyboard.h"
 
-void gogh_input(struct goghMovableObject *obj)
+void gogh_input()
 {
     SDL_Event event;
 
@@ -11,10 +11,8 @@ void gogh_input(struct goghMovableObject *obj)
             exit(0);
             break;
         case SDL_KEYDOWN:
-            gogh_on_key_down_event(&event.key, obj);
             break;
         case SDL_KEYUP:
-            gogh_on_key_up_event(&event.key, obj);
             break;
         default:
             break;

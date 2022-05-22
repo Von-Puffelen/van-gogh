@@ -3,7 +3,7 @@
 
 #include "GOGH/defines.h"
 
-void gogh_input(struct goghMovableObject *obj);
+void gogh_input();
 
 void gogh_on_key_down_event(SDL_KeyboardEvent *event, struct goghMovableObject *obj);
 
