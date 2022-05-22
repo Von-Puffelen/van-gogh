@@ -43,3 +43,14 @@ void gogh_draw_circle(struct goghApplication *app, int x0, int y0, int radius)
         }
     }
 }
+
+void gogh_draw_rectangle(struct goghApplication *app,
+                         int x0, int y0, int width, int height)
+{
+    SDL_Rect rectangle = {
+        x0, y0, width, height
+    };
+
+    SDL_RenderDrawRect(app->gogh_renderer, &rectangle);
+    SDL_RenderFillRect(app->gogh_renderer, &rectangle);
+}

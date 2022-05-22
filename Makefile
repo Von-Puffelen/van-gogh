@@ -12,7 +12,7 @@ LDFLAGS += `pkg-config sdl2 --libs`
 
 TARGET  = ${BIN}/"Van Gogh"
 
-SDIRS   = $(addprefix $(BIN)/, input keyboard renderer geometry)
+SDIRS   = $(addprefix $(BIN), /input /keyboard /renderer /geometry)
 SRCS    = $(wildcard $(SRC)/*.c) $(wildcard $(SRC)/**/*.c)
 OBJS    = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
 

@@ -8,9 +8,9 @@ void gogh_draw_circle(
     int x0, int y0,
     int radius);
 
-void gogh_fill_circle(
+void gogh_draw_rectangle(
     struct goghApplication *application,
     int x0, int y0,
-    int radius);
+    int width, int height);
 
 #endif // _GEOMETRY_H__
