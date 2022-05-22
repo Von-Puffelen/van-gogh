@@ -10,7 +10,12 @@
 #define GOGH_WINDOW_WIDTH 1280
 #define GOGH_WINDOW_HEIGHT 720
 
+#define GOGH_EXIT_ERROR(msg)                        \
+    printf("- %s, error: %s", msg, SDL_GetError()); \
+    exit(0);
+
 struct goghApplication {
+    uint8_t is_running;
     SDL_Window *gogh_window;
     SDL_Renderer *gogh_renderer;
 };

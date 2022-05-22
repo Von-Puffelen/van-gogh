@@ -1,3 +1,13 @@
+22-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Added Uniform error message for top level errors, like initializing SDL, SDLWindow
+        or SDLRenderer.
+
+        * src/input/main.c (main): Added top-level error macro and removed redunant error
+        checks.
+        * src/renderer/renderer.c (gogh_initialize_renderer): Added top-level error macro.
+        * src/window.c (gogh_initialize_window): Added top-level error macro.
+
 21-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Fixed bug where the drawing of the circle's fill would worsen when the size

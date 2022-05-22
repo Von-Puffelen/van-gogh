@@ -1,6 +1,6 @@
 #include "window.h"
 
-int gogh_initialize_window(struct goghApplication *application)
+void gogh_initialize_window(struct goghApplication *application)
 {
     application->gogh_window = SDL_CreateWindow(
         GOGH_APPLICATION_NAME,
@@ -10,15 +10,12 @@ int gogh_initialize_window(struct goghApplication *application)
         GOGH_WINDOW_HEIGHT,
         SDL_WINDOW_ALLOW_HIGHDPI);
 
-    if (application->gogh_window == NULL) 
-        return -1;
-
-    return 0;
-    
+    if (application->gogh_window == NULL) {
+        GOGH_EXIT_ERROR("window.c: Cannot initialize SDLWindow");
+    }
 }
 
-int gogh_destroy_window(struct goghApplication *window)
+void gogh_destroy_window(struct goghApplication *window)
 {
     SDL_DestroyWindow(window->gogh_window);
-    return 0;
 }

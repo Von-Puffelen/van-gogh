@@ -3,8 +3,8 @@
 
 #include "GOGH/defines.h"
 
-int gogh_initialize_window(struct goghApplication *application);
+void gogh_initialize_window(struct goghApplication *application);
 
-int gogh_destroy_window(struct goghApplication *application);
+void gogh_destroy_window(struct goghApplication *application);
 
 #endif // _GOGH_WINDOW_H__
