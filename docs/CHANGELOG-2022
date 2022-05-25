@@ -1,5 +1,10 @@
 25-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        * src/main.c (main): Added clear colour to window.
+        * include/GOGH/config.h: Small fixes.
+
+25-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Major refactor in the project structure, from now on I'll will create my own
         engine using OpenGL. Every change before this has been removed, and will be
         deprecated in the future.
