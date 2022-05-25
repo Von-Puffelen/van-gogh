@@ -10,6 +10,9 @@
     exit(0);                                      \
 }
 
+#define GOGH_ERROR(msg)                           \
+    printf("- %s, error: %s \n", __FILE__, msg);  
+
 #define GOGH_COLOUR(value) value / 255.0f
 
 const char* gogh_name = "Van Gogh - Applicatie";

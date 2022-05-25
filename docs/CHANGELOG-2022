@@ -1,7 +1,14 @@
 25-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Finished the 'Hello World' of the engine programming world. Implemented a
+        basic graphics pipeline, and created a triangle.
+
+        * src/main.c (main): Added a basic graphics pipeline.
+
+25-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         * src/main.c (main): Added clear colour to window.
-        * include/GOGH/config.h: Small fixes.
+        * include/GOGH/config.h: Small fixes.d
 
 25-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
