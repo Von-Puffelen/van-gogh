@@ -5,14 +5,14 @@ SRC = ./src
 CC       = gcc
 CFLAGS   = -std=c11
 CFLAGS  += -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
-CFLAGS  += -Wno-undef-prefix `pkg-config sdl2 --cflags`
+CFLAGS  += -Wno-undef-prefix
+CFLAGS  += `pkg-config --cflags glfw3`
 
 LDLIBS  += -L ${LIB}
-LDFLAGS += `pkg-config sdl2 --libs`
+LDFLAGS += `pkg-config --static --libs glfw3` -lglfw -lGLEW -framework OpenGL
 
 TARGET  = ${BIN}/"Van Gogh"
 
-SDIRS   = $(addprefix $(BIN), /input /keyboard /renderer /geometry /util)
 SRCS    = $(wildcard $(SRC)/*.c) $(wildcard $(SRC)/**/*.c)
 OBJS    = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
 
@@ -29,7 +29,7 @@ $(TARGET): $(OBJS)
 $(BIN)/%.o: $(SRC)/%.c
 	@echo "\033[1;33m"
 	@echo "=== Building... =========================================================="
-	mkdir -p $(BIN) $(SDIRS)
+	mkdir -p $(BIN) 
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $< -O3
 
 start:
