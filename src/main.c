@@ -25,13 +25,16 @@ int main(int argc, char** argv)
 
     glfwMakeContextCurrent(window);
         
+    // Initialize GLEW to experimental (macOS)
     glewExperimental = GL_TRUE;
     glewInit();
 
     /* Rendering */
     while (!glfwWindowShouldClose(window))
     {
+        glClearColor(GOGH_COLOUR(242), GOGH_COLOUR(242), GOGH_COLOUR(247), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        
         glfwSwapBuffers(window);
 
         glfwPollEvents();
