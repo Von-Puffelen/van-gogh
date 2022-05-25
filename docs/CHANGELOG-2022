@@ -1,3 +1,11 @@
+25-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Added a generic vector datastructure (dynamic array) into util/
+
+        * src/util/vector.c (vector_init, vector_resize, vector_append, vector_get)
+        (vector_free): Added simple vector operations.
+        * src/util/vector.h: Added vector struct and prototype.
+
 22-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Added Uniform error message for top level errors, like initializing SDL, SDLWindow
