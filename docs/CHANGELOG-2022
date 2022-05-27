@@ -1,5 +1,12 @@
 25-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added an Element Buffer Object to the code, this will remove overhead of rendering
+        multiple vertices.
+
+        * src/main.c (main): Added EBO
+        
+25-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Finished the 'Hello World' of the engine programming world. Implemented a
         basic graphics pipeline, and created a triangle.
 
