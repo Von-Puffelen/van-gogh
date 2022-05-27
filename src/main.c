@@ -4,20 +4,7 @@
 #include <GLFW/glfw3.h>
 
 #include "GOGH/config.h"
-
-const char *gogh_vertex_shader_source = "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "}\0";
-
-const char *gogh_fragment_shader_source = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(0.1f, 0.1f, 0.12f, 1.0f);\n"
-    "}\n\0";
+#include "gfx/shader.h"
 
 int main(int argc, char** argv)
 {
@@ -44,80 +31,37 @@ int main(int argc, char** argv)
     glewInit();
 
     /* Graphics pipelining */
-    int succes; // Compilation
-
-    // Vertex shader
-    unsigned int vertex_shader;
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-
-    glShaderSource(vertex_shader, 1, &gogh_vertex_shader_source, NULL);
-    glCompileShader(vertex_shader);
-    
-    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &succes);
-
-    if (!succes) {
-        GOGH_ERROR("Vertex shader compilation failed.");
-    }
-
-    // Fragment shader
-    unsigned int fragment_shader;
-    fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    glShaderSource(fragment_shader, 1, &gogh_fragment_shader_source, NULL);
-    glCompileShader(fragment_shader);
-
-    glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &succes);
-
-    if (!succes) {
-        GOGH_ERROR("Fragment shader compilation failed.");
-    }
-
-    // Shader program
     unsigned int shader_program;
-    shader_program = glCreateProgram();
-
-    glAttachShader(shader_program, vertex_shader);
-    glAttachShader(shader_program, fragment_shader);
-    glLinkProgram(shader_program);
-
-    glGetProgramiv(shader_program, GL_LINK_STATUS, &succes);
-
-    if (!succes) {
-        GOGH_ERROR("Linking of the shaders failed.");
-    }
-
-    // Free'ing unused memory
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
+    shader_program = gogh_shader_create(
+        "./resources/vertex_shaders/vertex_shader.glsl",
+        "./resources/fragment_shaders/fragment_shader.glsl");
     
     // Adding the vertex data
     float vertices[] = {
-        0.5f,  0.5f, 0.0f,  // top right
-        0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
-    };
-    unsigned int indices[] = {  // note that we start from 0!
-        0, 1, 3,   // first triangle
-        1, 2, 3    // second triangle
-    };  
+        // positions         // colors
+        0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+       -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
+        0.0f,  0.8f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
+    };   
     
-    unsigned int vbo, vao, ebo;
+    unsigned int vbo, vao;
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
-    glGenBuffers(1, &ebo);
 
     glBindVertexArray(vao);
     
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    // https://learnopengl.com/Getting-started/Hello-Triangle
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
+    // Position attribute
+    glVertexAttribPointer(
+        0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    // Colour attribute
+    glVertexAttribPointer(
+        1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3* sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     /* Rendering */
     while (!glfwWindowShouldClose(window))
@@ -126,10 +70,15 @@ int main(int argc, char** argv)
         glClear(GL_COLOR_BUFFER_BIT);
 
         /* Triangle */
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glUseProgram(shader_program);
         glBindVertexArray(vao);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        
+        // Wireframe mode
+        // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+        // Use if using EBO
+        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
         
         glfwSwapBuffers(window);
         glfwPollEvents();

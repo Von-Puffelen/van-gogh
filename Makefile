@@ -13,6 +13,7 @@ LDFLAGS += `pkg-config --static --libs glfw3` -lglfw -lGLEW -framework OpenGL
 
 TARGET  = ${BIN}/"Van Gogh"
 
+SDIRS   = $(addprefix $(BIN), /gfx)
 SRCS    = $(wildcard $(SRC)/*.c) $(wildcard $(SRC)/**/*.c)
 OBJS    = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
 
@@ -29,7 +30,7 @@ $(TARGET): $(OBJS)
 $(BIN)/%.o: $(SRC)/%.c
 	@echo "\033[1;33m"
 	@echo "=== Building... =========================================================="
-	mkdir -p $(BIN) 
+	mkdir -p $(BIN) $(SDIRS) 
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $< -O3
 
 start:
