@@ -7,12 +7,10 @@ This project is entirely meant to be an educational program, therefore the code 
 written for efficiency but for readability and consistency. The reason why I started this 
 project is because I wanted to have more experience in open source software and programming
 in the C language. I don't have a consistent product vision and my idea for this project 
-is very vague. I did this on purpose so that I will focus more on programming than 
-actually planning this project. In the past, I have continuously created new projects and 
-ended them, because I over plan the whole process. So I'll go outside of my comfort zone 
-and just start working on "something". I do accept merge requests and ideas from other 
-people so if you are searching for a project to work on or improve your skills then I
-greatly appreciate your help.
+is very vague. But the goal for now is creating a mathmatical animation engine and learning 
+how to program an graphics card using the OpenGL API. I do accept merge requests and ideas 
+from other people so if you are searching for a project to work on or improve your skills
+then I greatly appreciate your help.
 
 > **Note**: This project uses the GPL-3.0 license, if you make any changes please state 
 > these in the [docs/CHANGELOG](https://github.com/Von-Puffelen/van-gogh/blob/main/docs/CHANGELOG-2022)
