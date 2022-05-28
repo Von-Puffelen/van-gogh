@@ -2,7 +2,11 @@
 
         Added libraries link stage and the STB image library.
 
-        *
+        * resources/ -> res/
+        * resources/: Added prototype textures.
+        * lib/stb/stb_image.h: Added the STB image library from @Nothings.
+        * src/main.c (main): Updated resources folder.
+        * Makefile: Added library to link stage.
 
 27-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
