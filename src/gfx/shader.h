@@ -11,8 +11,6 @@
 
 #define GOGH_FILE_ELEMENT_SIZE 1
 
-static unsigned int _gogh_shader_compile(const char *shader_path, GLenum type);
-
 unsigned int gogh_shader_create(
     const char *vertex_shader_path, const char *fragment_shader_path);
 

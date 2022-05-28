@@ -12,7 +12,9 @@ CFLAGS  += -Wno-undef-prefix
 CFLAGS  += `pkg-config --cflags glfw3`
 
 LDLIBS  += -L $(LIB)
-LDFLAGS += `pkg-config --static --libs glfw3` -lglfw -lGLEW -framework OpenGL
+LDFLAGS += `pkg-config --static --libs glfw3` -lm -lglfw -lGLEW
+LDFLAGS += -framework OpenGL -framework IOKIT -framework CoreVideo -framework Cocoa
+LDFLAGS += -Ilib/stb
 
 INC := -I ./include
 

@@ -1,5 +1,13 @@
 28-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added textures to the project, still a workin in progress.
+
+        * include/GOGH/config.h: Removed annoying warning messages.
+        * src/main.c (main): Added textures using the stb library.
+        * Makefile: Added additional frameworks.
+
+28-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Added libraries link stage and the STB image library.
 
         * resources/ -> res/

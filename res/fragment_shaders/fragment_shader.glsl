@@ -1,9 +1,12 @@
 #version 330 core
 
 out vec4 frag_colour;  
+
 in vec3 colour;
+in vec2 texture_coords;
+
+uniform sampler2D gogh_texture;
   
-void main()
-{
-    frag_colour = vec4(colour, 1.0);
+void main() {
+    frag_colour = texture(gogh_texture, texture_coords) * vec4(colour, 1.0); 
 }

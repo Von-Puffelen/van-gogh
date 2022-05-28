@@ -16,8 +16,4 @@
 
 #define GOGH_COLOUR(value) value / 255.0f
 
-extern const char* gogh_name = "Van Gogh - Applicatie";
-extern const u_int16_t gogh_screen_width = 1280;
-extern const u_int16_t gogh_screen_height = 720;
-
 #endif /* _CONFIG_H__ */
