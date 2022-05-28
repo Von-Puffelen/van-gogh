@@ -1,6 +1,9 @@
-BIN = ./bin
-LIB = ./lib
-SRC = ./src
+TARGET  = ${BIN}/"Van Gogh"
+
+BIN  = ./bin
+LIB  = ./lib
+SRC  = ./src
+SDIR = $(addprefix $(BIN), /gfx)
 
 CC       = gcc
 CFLAGS   = -std=c11
@@ -8,40 +11,37 @@ CFLAGS  += -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
 CFLAGS  += -Wno-undef-prefix
 CFLAGS  += `pkg-config --cflags glfw3`
 
-LDLIBS  += -L ${LIB}
+LDLIBS  += -L $(LIB)
 LDFLAGS += `pkg-config --static --libs glfw3` -lglfw -lGLEW -framework OpenGL
 
-TARGET  = ${BIN}/"Van Gogh"
+INC := -I ./include
 
-SDIRS   = $(addprefix $(BIN), /gfx)
 SRCS    = $(wildcard $(SRC)/*.c) $(wildcard $(SRC)/**/*.c)
 OBJS    = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
-
-INC := -I ./include
 
 all: $(TARGET) start
 default: all
 
 $(TARGET): $(OBJS)
 	@echo "\033[1;33m"
-	@echo "=== Linking... ==========================================================="
-	$(CC) $^ -o $(TARGET) $(LDFLAGS) -O3
+	@echo "=== Linking... ========================================================="
+	$(CC) $^ -o $(TARGET) $(LDLIBS) $(LDFLAGS) -O3
 
 $(BIN)/%.o: $(SRC)/%.c
 	@echo "\033[1;33m"
-	@echo "=== Building... =========================================================="
-	mkdir -p $(BIN) $(SDIRS) 
+	@echo "=== Building... ========================================================"
+	mkdir -p $(BIN) $(SDIR) 
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $< -O3
 
 start:
 	@echo "\033[0;32m"
-	@echo "=== Executing... ========================================================="
+	@echo "=== Executing... ======================================================="
 	@echo "\033[0m" 
 	@$(TARGET)
 
 clean:
 	@echo "\033[0;32m"
-	@echo "=== Cleaning... =========================================================="
+	@echo "=== Cleaning... ========================================================"
 	@rm -rfv $(BIN) $(TARGET)
 
 .PHONY: start clean

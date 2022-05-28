@@ -33,8 +33,8 @@ int main(int argc, char** argv)
     /* Graphics pipelining */
     unsigned int shader_program;
     shader_program = gogh_shader_create(
-        "./resources/vertex_shaders/vertex_shader.glsl",
-        "./resources/fragment_shaders/fragment_shader.glsl");
+        "./res/vertex_shaders/vertex_shader.glsl",
+        "./res/fragment_shaders/fragment_shader.glsl");
     
     // Adding the vertex data
     float vertices[] = {

@@ -1,3 +1,9 @@
+28-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Added libraries link stage and the STB image library.
+
+        *
+
 27-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Created some abstraction for the shader creation.
