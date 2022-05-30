@@ -4,7 +4,8 @@
 
         * src/main.c: Refactor includes.
         * src/gfx/gfx.h: Added gfx includes.
-        * Makefile: Added CGLM
+        * Makefile: Added CGLM.
+        * LICENSE: Removed unnecessary line.
 
 28-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
