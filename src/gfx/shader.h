@@ -1,8 +1,8 @@
 #ifndef _SHADER_H__
 #define _SHADER_H__
 
-#include <GL/glew.h>
-#include <stdio.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include "../lib/stb/stb-image.h"
 
 #define GOGH_FILE_MODE "rb"
 

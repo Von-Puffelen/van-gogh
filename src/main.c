@@ -1,13 +1,7 @@
-#include <GL/glew.h>
-
-#define GL_SILENCE_DEPRECATION
-#include <GLFW/glfw3.h>
-
 #include "GOGH/config.h"
-#include "gfx/shader.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "../lib/stb/stb-image.h"
+#include "gfx/gfx.h"
+#include "gfx/shader.h"
 
 int main(int argc, char** argv)
 {

@@ -9,14 +9,15 @@ CC       = gcc
 CFLAGS   = -std=c11
 CFLAGS  += -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
 CFLAGS  += -Wno-undef-prefix
-CFLAGS  += `pkg-config --cflags glfw3`
+CFLAGS  += `pkg-config --cflags glfw3 cglm`
 
 LDLIBS  += -L $(LIB)
-LDFLAGS += `pkg-config --static --libs glfw3` -lm -lglfw -lGLEW
+LDFLAGS += `pkg-config --static --libs glfw3 cglm` -lm -lglfw -lGLEW
 LDFLAGS += -framework OpenGL -framework IOKIT -framework CoreVideo -framework Cocoa
 LDFLAGS += -Ilib/stb
 
 INC := -I ./include
+DEF := -DCGLM_STATIC=ON
 
 SRCS    = $(wildcard $(SRC)/*.c) $(wildcard $(SRC)/**/*.c)
 OBJS    = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
@@ -27,7 +28,7 @@ default: all
 $(TARGET): $(OBJS)
 	@echo "\033[1;33m"
 	@echo "=== Linking... ========================================================="
-	$(CC) $^ -o $(TARGET) $(LDLIBS) $(LDFLAGS) -O3
+	$(CC) $^ -o $(TARGET) $(DEF) $(LDLIBS) $(LDFLAGS) -O3
 
 $(BIN)/%.o: $(SRC)/%.c
 	@echo "\033[1;33m"

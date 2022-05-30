@@ -1,3 +1,11 @@
+20-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Added CGLM library and refactor include in main.c
+
+        * src/main.c: Refactor includes.
+        * src/gfx/gfx.h: Added gfx includes.
+        * Makefile: Added CGLM
+
 28-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Added textures to the project, still a workin in progress.
