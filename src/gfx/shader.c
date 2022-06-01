@@ -4,7 +4,7 @@
 #include <string.h>
 #include <assert.h>
 
-static unsigned int _gogh_shader_compile(const char *shader_path, GLenum type)
+static goghShader _gogh_shader_compile(const char *shader_path, GLenum type)
 {
     FILE *shader_file = fopen(shader_path, GOGH_FILE_MODE);
     char *shader_content;
@@ -31,7 +31,7 @@ static unsigned int _gogh_shader_compile(const char *shader_path, GLenum type)
 
     fclose(shader_file);
 
-    unsigned int shader = glCreateShader(type); 
+    goghShader shader = glCreateShader(type); 
     glShaderSource(
         shader, GOGH_FILE_ELEMENT_SIZE,
         (const GLchar *const *) &shader_content, NULL);
@@ -51,11 +51,11 @@ static unsigned int _gogh_shader_compile(const char *shader_path, GLenum type)
     
 }
 
-unsigned int gogh_shader_create(const char *vx_path, const char *fm_path)
+goghShader gogh_shader_create(const char *vx_path, const char *fm_path)
 {
-    unsigned int shader_program;
-    unsigned int vertex_shader = _gogh_shader_compile(vx_path, GL_VERTEX_SHADER);
-    unsigned int fragment_shader = _gogh_shader_compile(fm_path, GL_FRAGMENT_SHADER);
+    goghShader shader_program;
+    goghShader vertex_shader = _gogh_shader_compile(vx_path, GL_VERTEX_SHADER);
+    goghShader fragment_shader = _gogh_shader_compile(fm_path, GL_FRAGMENT_SHADER);
 
     shader_program = glCreateProgram();
     
@@ -73,3 +73,9 @@ unsigned int gogh_shader_create(const char *vx_path, const char *fm_path)
     return shader_program;
 
 }
+
+void gogh_shader_bind(goghShader *shader)
+{
+    glUseProgram(*shader);
+}
+

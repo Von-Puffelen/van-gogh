@@ -1,4 +1,12 @@
-20-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
+01-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Added a shader type and fixes.
+
+        * src/gfx/shader.c (gogh_shader_bind): Added a bind function.
+        * src/gfx/shader.h: Added shader type
+        * src/main.c: Refactor stb include from gfx.h to main.c.
+
+30-05-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Added CGLM library and refactor include in main.c
 

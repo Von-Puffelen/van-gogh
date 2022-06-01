@@ -3,6 +3,9 @@
 #include "gfx/gfx.h"
 #include "gfx/shader.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "../lib/stb/stb-image.h"
+
 int main(int argc, char** argv)
 {
     /* Initalization */
@@ -107,7 +110,7 @@ int main(int argc, char** argv)
 
         /* Triangle */
         glBindTexture(GL_TEXTURE_2D, texture);
-        glUseProgram(shader_program);
+        gogh_shader_bind(&shader_program);
         glBindVertexArray(vao);
         
         // Wireframe mode
