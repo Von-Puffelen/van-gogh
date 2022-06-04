@@ -6,6 +6,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "../lib/stb/stb-image.h"
 
+#include <cglm/cglm.h>
+
 int main(int argc, char** argv)
 {
     /* Initalization */
@@ -101,7 +103,7 @@ int main(int argc, char** argv)
     glGenerateMipmap(GL_TEXTURE_2D);
 
     stbi_image_free(data);
-    
+        
     /* Rendering */
     while (!glfwWindowShouldClose(window))
     {
@@ -112,6 +114,18 @@ int main(int argc, char** argv)
         glBindTexture(GL_TEXTURE_2D, texture);
         gogh_shader_bind(&shader_program);
         glBindVertexArray(vao);
+
+        /* Transformation */
+        mat4 trans = {{1.0f, 0.0f, 0.0f, 0.0f},
+                      {0.0f, 1.0f, 0.0f, 0.0f},
+                      {0.0f, 0.0f, 1.0f, 0.0f},
+                      {0.0f, 0.0f, 0.0f, 1.0f}};
+
+        glm_translate_to(trans, (vec3){ 0.5f, -0.5f, 0.0f}, trans);
+        glm_rotate(trans, (float)glfwGetTime(), (vec3){0.0f, 0.0f, 1.0f});
+
+        unsigned int location = glGetUniformLocation(shader_program, "transform");
+        glUniformMatrix4fv(location, 1, GL_FALSE, (float*) trans);
         
         // Wireframe mode
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
