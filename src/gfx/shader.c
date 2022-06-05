@@ -74,6 +74,12 @@ goghShader gogh_shader_create(const char *vx_path, const char *fm_path)
 
 }
 
+void gogh_shader_set_uniform_mat4(goghShader shader_program, char *name, mat4 value)
+{
+    glUniformMatrix4fv(
+        glGetUniformLocation(shader_program, name), 1, GL_FALSE, (float*) value);
+}
+
 void gogh_shader_bind(goghShader *shader)
 {
     glUseProgram(*shader);

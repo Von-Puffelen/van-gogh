@@ -1,5 +1,14 @@
 05-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Refactor the shader uniform values.
+
+        * src/main.c (main): Cleaned code.
+        * src/gfx/shader.c (gogh_shader_set_uniform_mat4): Added uniform
+        abstraction.
+        * src/gfx/shader.h: Added gogh_shader_set_uniform_mat4 function.
+
+05-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Created multiple cubes and went 3D.
 
         * src/main.c (main): Added multiple cube vertices and removed

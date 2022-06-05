@@ -154,43 +154,35 @@ int main(int argc, char** argv)
         gogh_shader_bind(&shader_program);
 
         /* Transformations */
-        mat4 view;
+        mat4 projection, view;
         glm_mat4_identity(view);
+        glm_mat4_identity(projection);
         
         glm_translate_to(view, (vec3){ 0.0f, 0.0f, -3.0f}, view);
-
-        mat4 projection;
-        glm_mat4_identity(projection);
-
         glm_perspective(glm_rad(45.0f), 1280 / 720, 0.1f, 100.0f, projection);
         
-        unsigned int view_location = glGetUniformLocation(shader_program, "view");
-        glUniformMatrix4fv(view_location, 1, GL_FALSE, (float*) view);
-
-        unsigned int projection_location = glGetUniformLocation(shader_program, "projection");
-        glUniformMatrix4fv(projection_location, 1, GL_FALSE, (float*) projection);
-                
-        // Wireframe mode
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-        // Use if using EBO
-        //glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        gogh_shader_set_uniform_mat4(shader_program, "view", view);
+        gogh_shader_set_uniform_mat4(shader_program, "projection", projection);
 
         for (int i = 0; i < 10; i++) {
             mat4 model;
             glm_mat4_identity(model);
+
             glm_translate(model, cube_positions[i]);
 
             float angle = 20.0f * (i + 0.5);
-            glm_rotate(model, (float) glfwGetTime() * glm_rad(angle), (vec3) { 1.0f, 0.3f, 0.5f });
-            unsigned int model_location = glGetUniformLocation(shader_program, "model");
-            glUniformMatrix4fv(model_location, 1, GL_FALSE, (float*) model);
+            float speed = (float) glfwGetTime() * glm_rad(angle);
+            
+            glm_rotate(model, speed, (vec3) { 1.0f, 0.3f, 0.5f });
+
+            gogh_shader_set_uniform_mat4(shader_program, "model", model);
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
                 
         glfwSwapBuffers(window);
         glfwPollEvents();
+        
     }
 
     /* Freeing */
