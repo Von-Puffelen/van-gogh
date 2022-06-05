@@ -1,3 +1,13 @@
+05-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Created multiple cubes and went 3D.
+
+        * src/main.c (main): Added multiple cube vertices and removed
+        some unnecessary code.
+        * res/vertex_shaders/vertex_shader.glsl: Removed colour uniform and
+        added normalized device coordinates.
+        * res/fragment_shaders/fragment_shader.glsl: Removed colour.
+
 04-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Learning linear algebra and added some tranformations.
