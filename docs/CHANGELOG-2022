@@ -1,5 +1,15 @@
 05-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added texture abstraction.
+
+        * src/main.c (main): Cleaned code.
+        * src/gfx/texture.c (gogh_texture_create, _gogh_texture_destroy): Added
+        abstraction for texture's.
+        * src/gfx/texture.h: Added gogh_texture_create and _gogh_texture_destroy.
+        * src/gfx/gfx.h: Removed whitespacing.
+
+05-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Refactor the shader uniform values.
 
         * src/main.c (main): Cleaned code.
