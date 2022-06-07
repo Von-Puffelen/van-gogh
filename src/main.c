@@ -1,35 +1,17 @@
 #include "GOGH/config.h"
 
 #include "gfx/gfx.h"
+#include "gfx/window.h"
 #include "gfx/shader.h"
 #include "gfx/texture.h"
 
 #include <cglm/cglm.h>
 
-
 int main(int argc, char** argv)
 {
-    /* Initalization */
-    if (!glfwInit()) 
-        GOGH_EXIT_ON_ERROR("Couldn't initialize GFLW3.");
-
-    // Window properties
-    glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    
-    GLFWwindow *window = glfwCreateWindow(
-        1280, 720, "A vanGogh application", NULL, NULL);
-
-    if (!window) 
-        GOGH_EXIT_ON_ERROR("Couldn't assign GLFW to window")
-
-    glfwMakeContextCurrent(window);
-        
-    // Initialize GLEW to experimental (macOS)
-    glewExperimental = GL_TRUE;
-    glewInit();
+    /* Initialization */
+    struct Window window;
+    gogh_window_initialize(&window, 1280, 720);
 
     /* OpenGL functionality */
     glEnable(GL_DEPTH_TEST);
@@ -123,7 +105,7 @@ int main(int argc, char** argv)
     texture = gogh_texture_create("./res/textures/prototype-dark.png");
         
     /* Rendering */
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(window.handle))
     {
         glClearColor(GOGH_COLOUR(242), GOGH_COLOUR(242), GOGH_COLOUR(247), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -161,7 +143,7 @@ int main(int argc, char** argv)
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
                 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(window.handle);
         glfwPollEvents();
         
     }
@@ -171,7 +153,7 @@ int main(int argc, char** argv)
     glDeleteBuffers(1, &vbo);
 
     /* Closing */
-    glfwTerminate();
+    gogh_window_destroy(&window);
 
     return 0;
 }

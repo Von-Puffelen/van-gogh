@@ -19,8 +19,8 @@ LDFLAGS += -Ilib/stb
 INC := -I ./include
 DEF := -DCGLM_STATIC=ON
 
-SRCS    = $(wildcard $(SRC)/*.c) $(wildcard $(SRC)/**/*.c)
-OBJS    = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
+SRCS = $(wildcard $(SRC)/*.c) $(wildcard $(SRC)/**/*.c)
+OBJS = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
 
 all: $(TARGET) start
 default: all

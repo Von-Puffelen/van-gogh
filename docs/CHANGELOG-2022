@@ -1,3 +1,13 @@
+07-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Added window abstraction.
+
+        * src/main.c (main): Cleaned code.
+        * src/gfx/window.c (gogh_window_initialize, gogh_window_on_resize_event)
+        (gogh_window_destroy): Added abstraction for window management.
+        * src/gfx/window.h: Added window structure.
+        * Makefile: Removed some whitespacing.
+
 05-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Added texture abstraction.
