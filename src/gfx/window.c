@@ -24,7 +24,8 @@ void gogh_window_initialize(struct Window *window, int width, int heigth)
         GOGH_EXIT_ON_ERROR("Couldn't assign GLFW to window");
 
     glfwMakeContextCurrent(window->handle);
-    glfwSetFramebufferSizeCallback(window->handle, gogh_window_on_resize_event);
+    glfwSetFramebufferSizeCallback(window->handle,
+                                   (void*) gogh_window_on_resize_event);
 
     _gogh_window_initialize_glew();
 

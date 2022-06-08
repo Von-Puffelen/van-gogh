@@ -7,6 +7,8 @@
 
 #include <cglm/cglm.h>
 
+void gogh_input_manager(struct Window *window);
+
 int main(int argc, char** argv)
 {
     /* Initialization */
@@ -103,6 +105,26 @@ int main(int argc, char** argv)
     /* Textures */
     unsigned int texture;
     texture = gogh_texture_create("./res/textures/prototype-dark.png");
+
+    /* Camera */
+    vec3 camera_direction;
+    vec3 camera_position  = (vec3) { 0.0f, 0.0f, 3.0f };
+    vec3 camera_target    = (vec3) { 0.0f, 0.0f, 0.0f };
+
+    glm_normalize_to(
+        (float*) (camera_position - camera_target), (float*) &camera_direction);
+
+    // X axis
+    vec3 camera_x_axis;
+    vec3 camera_cross_product;
+    vec3 camera_up = (vec3) { 0.0f, 1.0f, 0.0f };
+    
+    glm_cross(camera_up, camera_direction, camera_cross_product);
+    glm_normalize_to(camera_cross_product, camera_x_axis);
+    
+    // Y axis
+    vec3 camera_y_axis;
+    glm_cross(camera_direction, camera_x_axis, camera_y_axis);
         
     /* Rendering */
     while (!glfwWindowShouldClose(window.handle))
@@ -110,11 +132,19 @@ int main(int argc, char** argv)
         glClearColor(GOGH_COLOUR(242), GOGH_COLOUR(242), GOGH_COLOUR(247), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        /* Input Management */
+        gogh_input_manager(&window);
+
         /* Textures */
         glBindTexture(GL_TEXTURE_2D, texture);
 
         /* Shaders */
         gogh_shader_bind(&shader_program);
+
+        /* Camera */
+        const float radius = 10.0f;
+        float camX = sin(glfwGetTime()) * radius;
+        float camZ = cos(glfwGetTime()) * radius;
 
         /* Transformations */
         mat4 projection, view;
@@ -123,6 +153,10 @@ int main(int argc, char** argv)
         
         glm_translate_to(view, (vec3){ 0.0f, 0.0f, -3.0f}, view);
         glm_perspective(glm_rad(45.0f), 1280 / 720, 0.1f, 100.0f, projection);
+
+        glm_lookat(
+            (vec3) { camX, 0.0f, camZ }, (vec3) { 0.0f, 0.0f, -3.0f },
+            (vec3) { 0.0f, 1.0f, 0.0f }, &view);
         
         gogh_shader_set_uniform_mat4(shader_program, "view", view);
         gogh_shader_set_uniform_mat4(shader_program, "projection", projection);
@@ -156,4 +190,8 @@ int main(int argc, char** argv)
     gogh_window_destroy(&window);
 
     return 0;
+}
+
+void gogh_input_manager(struct Window *window)
+{
 }
