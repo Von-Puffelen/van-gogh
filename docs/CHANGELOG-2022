@@ -1,5 +1,9 @@
 14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added CPP equivalent of the texture component.
+
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Added the library stb for image loading.
 
         * Makefile: Added STB library.
