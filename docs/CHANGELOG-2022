@@ -1,5 +1,12 @@
 14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Created the CPP equivalent of the OpenGL triangle.
+
+        * src/: CPP port of the C version.
+        * Makefile: Added the GLEW Library.
+
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         * Makefile: Fixed issues with the header includes.
 
 14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>

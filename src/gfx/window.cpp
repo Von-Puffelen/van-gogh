@@ -1,7 +1,7 @@
 #include "GOGH/vangogh.hpp"
 #include "gfx/window.hpp"
 
-void Window::create()
+void Window::create(const char *name, i16vec2 size)
 {
     if (!glfwInit()) {
         GOGH_EXIT_ON_ERROR("Couldn't initialize GFLW3.");
@@ -14,12 +14,14 @@ void Window::create()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     this->handle = glfwCreateWindow(
-        1280, 720, "A vanGogh application", NULL, NULL);
+        size.x, size.y, "A vanGogh application", NULL, NULL);
 
     if (!this->handle) 
         GOGH_ERROR("Couldn't assign GLFW to window");
 
     glfwMakeContextCurrent(this->handle);
+    glewExperimental = GL_TRUE;
+    glewInit();
 }
 
 void Window::destroy()

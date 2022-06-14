@@ -12,7 +12,9 @@
 #define _GOGH_END_COLOUR "\x1B[0m"
 
 #define _GOGH_PRINT_PREFIX  "[DEBUG] " 
-#define _GOGH_PRINT_POSTFIX "\n" 
+#define _GOGH_PRINT_POSTFIX "\n"
+
+#define GOGH_COLOUR(value) value / 255.0f
 
 #ifdef DEBUG
 

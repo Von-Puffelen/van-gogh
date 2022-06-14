@@ -12,18 +12,23 @@ OUT = $(BIN)/$(TARGET)
 
 # Dependencies
 PATH_GLFW = $(LIB)/glfw
+PATH_GLEW = $(LIB)/glew
+PATH_GLM = $(LIB)/glm
 
 # Flags
 CXXFLAGS  = -std=c++20 -g -O1
 CXXFLAGS += -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
 CXXFLAGS += -Wpedantic -Wno-undef-prefix
 
-LDFLAGS   = -lm -lstdc++
+LDFLAGS   = -lm -lstdc++ 
 LDFLAGS  += $(PATH_GLFW)/src/libglfw3.a # GLFW
+LDFLAGS  += $(PATH_GLEW)/lib/libGLEW.a  # GLEW 
 
 INCFLAGS  = -iquotesrc
 INCFLAGS += -I$(INC)
 INCFLAGS += -I$(PATH_GLFW)/include 
+INCFLAGS += -I$(PATH_GLEW)/include 
+INCFLAGS += -I$(PATH_GLM) 
 
 # Frameworks
 FRAMEWORKS  = -framework OpenGL
@@ -39,6 +44,7 @@ all: $(TARGET) start
 
 libs:
 	cd $(LIB)/glfw && cmake . && make
+	cd $(LIB)/glm && cmake . && make
 
 $(TARGET): $(OBJS)
 	@echo "\033[1;33m"

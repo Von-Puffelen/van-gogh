@@ -2,10 +2,6 @@
 
 out vec4 frag_colour;  
 
-in vec2 texture_coords;
-
-uniform sampler2D gogh_texture;
-  
 void main() {
-    frag_colour = texture(gogh_texture, texture_coords); 
+    frag_colour = vec4(0.1f, 0.1f, 0.12, 1.0f); 
 }
