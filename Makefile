@@ -1,50 +1,62 @@
-TARGET  = ${BIN}/"Van Gogh"
 
-BIN  = ./bin
-LIB  = ./lib
-SRC  = ./src
-SDIR = $(addprefix $(BIN), /gfx)
+CXX    = clang++
+TARGET = van-gogh
 
-CC       = gcc
-CFLAGS   = -std=c11
-CFLAGS  += -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
-CFLAGS  += -Wno-undef-prefix
-CFLAGS  += `pkg-config --cflags glfw3 cglm`
+# project structure
+BIN = ./bin
+LIB = ./libs
+SRC = ./src
 
-LDLIBS  += -L $(LIB)
-LDFLAGS += `pkg-config --static --libs glfw3 cglm` -lm -lglfw -lGLEW
-LDFLAGS += -framework OpenGL -framework IOKIT -framework CoreVideo -framework Cocoa
-LDFLAGS += -Ilib/stb
+OUT = $(BIN)/$(TARGET)
 
-INC := -I ./include
-DEF := -DCGLM_STATIC=ON
+# Dependencies
+PATH_GLFW = $(LIB)/glfw
 
-SRCS = $(wildcard $(SRC)/*.c) $(wildcard $(SRC)/**/*.c)
-OBJS = $(patsubst $(SRC)/%.c, $(BIN)/%.o, $(SRCS))
+# Flags
+CXXFLAGS  = -std=c++20 -g -O1
+CXXFLAGS += -Wall -Wextra -Wno-nullability-completeness -Wno-unused-parameter
+CXXFLAGS += -Wpedantic -Wno-undef-prefix
+
+LDFLAGS   = -lm -lstdc++
+LDFLAGS  += $(PATH_GLFW)/src/libglfw3.a # GLFW
+
+INCFLAGS  = -I$(PATH_GLFW)/include 
+
+# Frameworks
+FRAMEWORKS  = -framework OpenGL
+FRAMEWORKS += -framework Cocoa
+FRAMEWORKS += -framework IOKIT
+FRAMEWORKS += -framework CoreFoundation
+
+# sources 
+SRCS = $(shell find $(SRC) -name "*.cpp")
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(TARGET) start
-default: all
+
+libs:
+	cd $(LIB)/glfw && cmake . && make
 
 $(TARGET): $(OBJS)
 	@echo "\033[1;33m"
 	@echo "=== Linking... ========================================================="
-	$(CC) $^ -o $(TARGET) $(DEF) $(LDLIBS) $(LDFLAGS) -O3
+	@mkdir -p $(BIN)
+	$(CXX) $^ -o $(OUT) $(LDFLAGS) $(FRAMEWORKS) 
 
 $(BIN)/%.o: $(SRC)/%.c
 	@echo "\033[1;33m"
 	@echo "=== Building... ========================================================"
-	mkdir -p $(BIN) $(SDIR) 
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $< -O3
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c -o $@ $< 
 
 start:
 	@echo "\033[0;32m"
 	@echo "=== Executing... ======================================================="
 	@echo "\033[0m" 
-	@$(TARGET)
+	@$(OUT)
 
 clean:
 	@echo "\033[0;32m"
 	@echo "=== Cleaning... ========================================================"
-	@rm -rfv $(BIN) $(TARGET)
+	@rm -rfv $(OBJS) 
 
 .PHONY: start clean
