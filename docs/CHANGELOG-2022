@@ -1,3 +1,8 @@
+08-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        * src/main.c (main, gogh_input_manager): Added camera rotation, and keyboard input.
+        * src/gfx/window.c (gogh_window_initialize): Convertion fix.
+
 07-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Added window abstraction.

@@ -1,11 +1,18 @@
 #include "GOGH/config.h"
 
+#include "cglm/types.h"
 #include "gfx/gfx.h"
 #include "gfx/window.h"
 #include "gfx/shader.h"
 #include "gfx/texture.h"
 
 #include <cglm/cglm.h>
+
+void gogh_input_manager(struct Window *window);
+
+vec3 camera_position = (vec3) { 0.0f, 0.0f, 3.0f };
+vec3 camera_front = (vec3) { 0.0f, 0.0f, -1.0f };
+vec3 camera_up = (vec3) { 0.0f, 1.0f, 0.0f };
 
 int main(int argc, char** argv)
 {
@@ -76,9 +83,10 @@ int main(int argc, char** argv)
 
     /* Shaders */
     unsigned int shader_program;
-    shader_program = gogh_shader_create(
-        "./res/vertex_shaders/vertex_shader.glsl",
-        "./res/fragment_shaders/fragment_shader.glsl");
+    shader_program =
+        gogh_shader_create(
+            "./res/vertex_shaders/vertex_shader.glsl",
+            "./res/fragment_shaders/fragment_shader.glsl");
     
     /* Vertices buffers */
     unsigned int vbo, vao;
@@ -103,6 +111,24 @@ int main(int argc, char** argv)
     /* Textures */
     unsigned int texture;
     texture = gogh_texture_create("./res/textures/prototype-dark.png");
+
+    /* Camera */
+    vec3 camera_direction;
+    vec3 camera_target    = (vec3) { 0.0f, 0.0f, 0.0f };
+
+    glm_normalize_to(
+        (float*) (camera_position - camera_target), (float*) &camera_direction);
+
+    // X axis
+    vec3 camera_x_axis;
+    vec3 camera_cross_product;
+    
+    glm_cross(camera_up, camera_direction, camera_cross_product);
+    glm_normalize_to(camera_cross_product, camera_x_axis);
+    
+    // Y axis
+    vec3 camera_y_axis;
+    glm_cross(camera_direction, camera_x_axis, camera_y_axis);
         
     /* Rendering */
     while (!glfwWindowShouldClose(window.handle))
@@ -110,11 +136,19 @@ int main(int argc, char** argv)
         glClearColor(GOGH_COLOUR(242), GOGH_COLOUR(242), GOGH_COLOUR(247), 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        /* Input Management */
+        gogh_input_manager(&window);
+
         /* Textures */
         glBindTexture(GL_TEXTURE_2D, texture);
 
         /* Shaders */
         gogh_shader_bind(&shader_program);
+
+        /* Camera */
+        const float radius = 10.0f;
+        float camX = sin(glfwGetTime()) * radius;
+        float camZ = cos(glfwGetTime()) * radius;
 
         /* Transformations */
         mat4 projection, view;
@@ -123,6 +157,10 @@ int main(int argc, char** argv)
         
         glm_translate_to(view, (vec3){ 0.0f, 0.0f, -3.0f}, view);
         glm_perspective(glm_rad(45.0f), 1280 / 720, 0.1f, 100.0f, projection);
+
+        glm_lookat(
+            (vec3) { camX, 0.0f, camZ }, (vec3) { 0.0f, 0.0f, -3.0f },
+            (vec3) { 0.0f, 1.0f, 0.0f }, &view);
         
         gogh_shader_set_uniform_mat4(shader_program, "view", view);
         gogh_shader_set_uniform_mat4(shader_program, "projection", projection);
@@ -156,4 +194,23 @@ int main(int argc, char** argv)
     gogh_window_destroy(&window);
 
     return 0;
+}
+
+void gogh_input_manager(struct Window *window)
+{
+    if (glfwGetKey(window->handle, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window->handle, true);
+    }
+
+    const float camera_speed = 0.05f;
+    if (glfwGetKey(window->handle, GLFW_KEY_W) == GLFW_PRESS) {
+        ca
+    }
+    if (glfwGetKey(window->handle, GLFW_KEY_S) == GLFW_PRESS) {
+    }
+    if (glfwGetKey(window->handle, GLFW_KEY_A) == GLFW_PRESS) {
+    }
+    if (glfwGetKey(window->handle, GLFW_KEY_D) == GLFW_PRESS) {
+    }
+    
 }
