@@ -14,7 +14,7 @@ int main(UNUSED int argc, UNUSED char *argv[])
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
         0.0f,  0.5f, 0.0f
-    };  
+    };
 
     /* Shader */
     Shader *shader_program = new Shader(

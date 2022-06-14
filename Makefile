@@ -14,6 +14,7 @@ OUT = $(BIN)/$(TARGET)
 PATH_GLFW = $(LIB)/glfw
 PATH_GLEW = $(LIB)/glew
 PATH_GLM = $(LIB)/glm
+PATH_STB = $(LIB)/stb
 
 # Flags
 CXXFLAGS  = -std=c++20 -g -O1
@@ -29,6 +30,7 @@ INCFLAGS += -I$(INC)
 INCFLAGS += -I$(PATH_GLFW)/include 
 INCFLAGS += -I$(PATH_GLEW)/include 
 INCFLAGS += -I$(PATH_GLM) 
+INCFLAGS += -I$(PATH_STB) 
 
 # Frameworks
 FRAMEWORKS  = -framework OpenGL

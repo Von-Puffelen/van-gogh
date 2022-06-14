@@ -15,9 +15,6 @@ compile_commands.json
 bin/
 
 # Files
-libs/glew
-libs/glfw
-libs/glm
 
 ## Executable files
 *.out

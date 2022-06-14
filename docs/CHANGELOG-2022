@@ -1,5 +1,11 @@
 14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        Added the library stb for image loading.
+
+        * Makefile: Added STB library.
+
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Created the CPP equivalent of the OpenGL triangle.
 
         * src/: CPP port of the C version.
