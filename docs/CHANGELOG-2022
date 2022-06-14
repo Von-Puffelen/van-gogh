@@ -1,7 +1,7 @@
 14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
-        * 
-        
+        * Makefile: Fixed issues with the header includes.
+
 14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Switched to CPP because of issues using the CGLM library, these issues weren't

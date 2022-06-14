@@ -1,9 +1,8 @@
-#include <iostream>
+#include "GOGH/vangogh.hpp"
+#include "gfx/gfx.hpp"
 
-#define GL_SILENCE_DEPRECATION
-#include <GLFW/glfw3.h>
-
-int main(void) {
-
+int main(UNUSED int argc, UNUSED char **argv)
+{
+    
     return 0;
 }
