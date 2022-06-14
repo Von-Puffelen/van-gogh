@@ -1,5 +1,6 @@
 #include "GOGH/config.h"
 
+#include "cglm/types.h"
 #include "gfx/gfx.h"
 #include "gfx/window.h"
 #include "gfx/shader.h"
@@ -8,6 +9,10 @@
 #include <cglm/cglm.h>
 
 void gogh_input_manager(struct Window *window);
+
+vec3 camera_position = (vec3) { 0.0f, 0.0f, 3.0f };
+vec3 camera_front = (vec3) { 0.0f, 0.0f, -1.0f };
+vec3 camera_up = (vec3) { 0.0f, 1.0f, 0.0f };
 
 int main(int argc, char** argv)
 {
@@ -78,9 +83,10 @@ int main(int argc, char** argv)
 
     /* Shaders */
     unsigned int shader_program;
-    shader_program = gogh_shader_create(
-        "./res/vertex_shaders/vertex_shader.glsl",
-        "./res/fragment_shaders/fragment_shader.glsl");
+    shader_program =
+        gogh_shader_create(
+            "./res/vertex_shaders/vertex_shader.glsl",
+            "./res/fragment_shaders/fragment_shader.glsl");
     
     /* Vertices buffers */
     unsigned int vbo, vao;
@@ -108,7 +114,6 @@ int main(int argc, char** argv)
 
     /* Camera */
     vec3 camera_direction;
-    vec3 camera_position  = (vec3) { 0.0f, 0.0f, 3.0f };
     vec3 camera_target    = (vec3) { 0.0f, 0.0f, 0.0f };
 
     glm_normalize_to(
@@ -117,7 +122,6 @@ int main(int argc, char** argv)
     // X axis
     vec3 camera_x_axis;
     vec3 camera_cross_product;
-    vec3 camera_up = (vec3) { 0.0f, 1.0f, 0.0f };
     
     glm_cross(camera_up, camera_direction, camera_cross_product);
     glm_normalize_to(camera_cross_product, camera_x_axis);
@@ -194,4 +198,19 @@ int main(int argc, char** argv)
 
 void gogh_input_manager(struct Window *window)
 {
+    if (glfwGetKey(window->handle, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window->handle, true);
+    }
+
+    const float camera_speed = 0.05f;
+    if (glfwGetKey(window->handle, GLFW_KEY_W) == GLFW_PRESS) {
+        ca
+    }
+    if (glfwGetKey(window->handle, GLFW_KEY_S) == GLFW_PRESS) {
+    }
+    if (glfwGetKey(window->handle, GLFW_KEY_A) == GLFW_PRESS) {
+    }
+    if (glfwGetKey(window->handle, GLFW_KEY_D) == GLFW_PRESS) {
+    }
+    
 }
