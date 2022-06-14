@@ -5,6 +5,7 @@ TARGET = van-gogh
 # project structure
 BIN = ./bin
 LIB = ./libs
+INC = ./include
 SRC = ./src
 
 OUT = $(BIN)/$(TARGET)
@@ -20,7 +21,9 @@ CXXFLAGS += -Wpedantic -Wno-undef-prefix
 LDFLAGS   = -lm -lstdc++
 LDFLAGS  += $(PATH_GLFW)/src/libglfw3.a # GLFW
 
-INCFLAGS  = -I$(PATH_GLFW)/include 
+INCFLAGS  = -iquotesrc
+INCFLAGS += -I$(INC)
+INCFLAGS += -I$(PATH_GLFW)/include 
 
 # Frameworks
 FRAMEWORKS  = -framework OpenGL
@@ -43,7 +46,7 @@ $(TARGET): $(OBJS)
 	@mkdir -p $(BIN)
 	$(CXX) $^ -o $(OUT) $(LDFLAGS) $(FRAMEWORKS) 
 
-$(BIN)/%.o: $(SRC)/%.c
+%.o: %.cpp
 	@echo "\033[1;33m"
 	@echo "=== Building... ========================================================"
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c -o $@ $< 

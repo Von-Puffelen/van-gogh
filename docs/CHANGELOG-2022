@@ -1,5 +1,9 @@
 14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
+        * 
+        
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
         Switched to CPP because of issues using the CGLM library, these issues weren't
         API breaking but really annoying to fix. CPP just has better support for this
         library.
