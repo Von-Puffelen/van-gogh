@@ -1,3 +1,12 @@
+15-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Refactored the entire codebase to C++, from now on the CHANGELOG will be
+        maintained correctly again.
+
+        * src/main.cpp (main): Added Camera and cube vertices.
+        * src/gfx/camera.cpp (update): Added camera update every frame.
+        * src/gfx/camera.hpp (Camera): Camera class.
+
 14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         Added CPP equivalent of the texture component.
