@@ -1,3 +1,43 @@
+15-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Refactored the entire codebase to C++, from now on the CHANGELOG will be
+        maintained correctly again.
+
+        * src/main.cpp (main): Added Camera and cube vertices.
+        * src/gfx/camera.cpp (update): Added camera update every frame.
+        * src/gfx/camera.hpp (Camera): Camera class.
+
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Added CPP equivalent of the texture component.
+
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Added the library stb for image loading.
+
+        * Makefile: Added STB library.
+
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Created the CPP equivalent of the OpenGL triangle.
+
+        * src/: CPP port of the C version.
+        * Makefile: Added the GLEW Library.
+
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        * Makefile: Fixed issues with the header includes.
+
+14-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
+
+        Switched to CPP because of issues using the CGLM library, these issues weren't
+        API breaking but really annoying to fix. CPP just has better support for this
+        library.
+
+        * src/main.cpp (main): Added GLFW.
+        * Makefile: New cpp configurations.
+        * .gitmodules: Using git modules for better library support.
+
 08-06-2022  René Huiberts  <rhuibertsjr@gmail.com>
 
         * src/main.c (main, gogh_input_manager): Added camera rotation, and keyboard input.
