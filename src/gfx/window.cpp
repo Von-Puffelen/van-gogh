@@ -7,6 +7,7 @@ void Window::create(const char *name, i16vec2 size)
         GOGH_EXIT_ON_ERROR("Couldn't initialize GFLW3.");
     }
 
+    /* GLFW configurations */
     glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -22,6 +23,9 @@ void Window::create(const char *name, i16vec2 size)
     glfwMakeContextCurrent(this->handle);
     glewExperimental = GL_TRUE;
     glewInit();
+
+    /* OpenGL features */
+    glEnable(GL_DEPTH_TEST); // Must be after glfwMakeContextCurrent.
 }
 
 void Window::destroy()

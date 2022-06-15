@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gfx/gfx.hpp"
+#include "util/math.hpp"
 
 #include <string>
 
@@ -14,19 +15,14 @@
 struct Shader {
 
     unsigned int shader;
-    const char *vertex_shader_path;
-    const char *fragment_shader_path;
 
-    Shader(const char *vertex_shader_path, const char *fragment_shader_path)
-        : vertex_shader_path(vertex_shader_path),
-          fragment_shader_path(fragment_shader_path) {}
-
-    void create();
+    void create(const char *vertex_shader_path, const char *fragment_shader_path);
     void use();
 
-    void setShaderUniform(std::string &name, bool value);
-    void setShaderUniform(std::string &name, float value);
-    void setShaderUniform(std::string &name, int value);
+    void setShaderUniform(const char *name, bool value);
+    void setShaderUniform(const char *name, float value);
+    void setShaderUniform(const char *name, int value);
+    void setShaderUniform(const char *name, glm::mat4 value);
 
 private:
 

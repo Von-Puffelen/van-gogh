@@ -7,86 +7,161 @@
 
 int main(UNUSED int argc, UNUSED char *argv[])
 {
-    State *state = new State();
+    std::unique_ptr<State> state(new State());
     state->window = new Window(); 
-    state->window->create("A vanGogh application", { 1280, 720 } );
+    state->camera = new Camera();
+    
+    state->window->create(
+        "A vanGogh application", { 1280, 720 } );
 
     float vertices[] = {
-        // positions          // colors           // texture coords
-         0.5f,  0.7f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-         0.5f, -0.7f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-        -0.5f, -0.7f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-        -0.5f,  0.7f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        
+       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+       -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        
+       -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+       -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+       -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        
+       -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+       -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+       -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        
+       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+       -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+       -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
-    unsigned int indices[] = {  
-        0, 1, 3, // first triangle
-        1, 2, 3  // second triangle
-    };
-    
+    glm::vec3 mesh_positions[] = {
+        glm::vec3(  0.0f,  0.0f,  0.0f ), // Middle
+        glm::vec3(  0.0f,  1.7f,  0.0f ), // Top
+        glm::vec3(  0.0f, -1.7f,  0.0f ), // Bottom 
+        glm::vec3(  1.7f,  0.0f,  0.0f ), // Right
+        glm::vec3( -1.7f,  0.0f,  0.0f ), // Left
+        glm::vec3( -1.7f,  1.7f,  0.0f ), // Top Left
+        glm::vec3(  1.7f,  1.7f,  0.0f ), // Top Right
+        glm::vec3(  1.7f, -1.7f,  0.0f ), // Bottom Right
+        glm::vec3( -1.7f, -1.7f,  0.0f ), // Bottom Left 
+
+        glm::vec3(  0.0f,  0.0f, -1.7f ), // Middle
+        glm::vec3(  0.0f,  1.7f, -1.7f ), // Top
+        glm::vec3(  0.0f, -1.7f, -1.7f ), // Bottom 
+        glm::vec3(  1.7f,  0.0f, -1.7f ), // Right
+        glm::vec3( -1.7f,  0.0f, -1.7f ), // Left
+        glm::vec3( -1.7f,  1.7f, -1.7f ), // Top Left
+        glm::vec3(  1.7f,  1.7f, -1.7f ), // Top Right
+        glm::vec3(  1.7f, -1.7f, -1.7f ), // Bottom Right
+        glm::vec3( -1.7f, -1.7f, -1.7f ), // Bottom Left 
+
+        glm::vec3(  0.0f,  0.0f,  1.7f ), // Middle
+        glm::vec3(  0.0f,  1.7f,  1.7f ), // Top
+        glm::vec3(  0.0f, -1.7f,  1.7f ), // Bottom 
+        glm::vec3(  1.7f,  0.0f,  1.7f ), // Right
+        glm::vec3( -1.7f,  0.0f,  1.7f ), // Left
+        glm::vec3( -1.7f,  1.7f,  1.7f ), // Top Left
+        glm::vec3(  1.7f,  1.7f,  1.7f ), // Top Right
+        glm::vec3(  1.7f, -1.7f,  1.7f ), // Bottom Right
+        glm::vec3( -1.7f, -1.7f,  1.7f ), // Bottom Left 
+    };    
+
     /* Shader */
-    Shader *shader_program = new Shader(
+    std::unique_ptr<Shader> shader_program(new Shader);
+    shader_program->create(
         "./resources/vertex_shaders/vertex_shader.glsl",
-        "./resources/fragment_shaders/fragment_shader.glsl");
-
-    shader_program->create();
+        "./resources/fragment_shaders/fragment_shader.glsl");    
 
     /* Texture */
-    Texture *texture = new Texture();
-    texture->create("./resources/textures/prototype-dark.png");
+    std::unique_ptr<Texture> texture(new Texture);
+    texture->create(
+        "./resources/textures/prototype-dark.png");
 
-    unsigned int vbo, vao, ebo;
+    /* Vertex information storage */
+    unsigned int vbo, vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
     glGenBuffers(1, &vbo);
-    glGenBuffers(1, &ebo);
     
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
     // Position attribute
     glVertexAttribPointer(
-        0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+        0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) 0);
     glEnableVertexAttribArray(0);
-
-    // Colour attribute
-    glVertexAttribPointer(
-        1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3* sizeof(float)));
-    glEnableVertexAttribArray(1);
 
     // Texture attribute
     glVertexAttribPointer(
-        2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6* sizeof(float)));
-    glEnableVertexAttribArray(2);    
+        1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) (3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    
     /* Rendering */
     while(!glfwWindowShouldClose(state->window->handle)) {
 
         glClearColor(GOGH_COLOUR(242), GOGH_COLOUR(242), GOGH_COLOUR(247), 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        /* Texture */
+        texture->use();
 
         /* Shaders */
         shader_program->use();
 
-        /* Texture */
-        texture->use();
-        
-        /* Triangle */
-        glUseProgram(shader_program->shader);
+        shader_program->setShaderUniform("view", state->camera->view);
+        shader_program->setShaderUniform("projection", state->camera->projection);
+
+        /* Rendering */
         glBindVertexArray(vao);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        // Meshes
+        for (unsigned int i = 0; i < 27; i++) {
+            glm::mat4 model_space = glm::mat4(1.0f);
+            model_space = glm::translate(model_space, mesh_positions[i]);
+
+            float angle = 20.0f * (i + 2.5);
+            model_space =
+                glm::rotate(model_space, glm::radians(angle), { 1.0f, 0.3f, 0.5f });
+
+            shader_program->setShaderUniform("model", model_space);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+
+        /* Camera */
+        const float radius = 10.0f;
+        float camera_pos_x = sin(glfwGetTime()) * radius;
+        float camera_pos_y = (cos(glfwGetTime()) * radius) / 2;
+        float camera_pos_z = cos(glfwGetTime()) * radius;
+        state->camera->update(camera_pos_x, camera_pos_y, camera_pos_z);
 
         glfwSwapBuffers(state->window->handle);
         glfwPollEvents();
     }
-
-    state->window->destroy();
-
-    delete state->window;
-    delete state;
 
     return 0;
 }

@@ -5,13 +5,13 @@
 #include <sstream>
 #include <cassert>
 
-void Shader::create()
+void Shader::create(const char *vx_path, const char *fg_path)
 {
     unsigned int shader_program;
     unsigned int vertex_shader =
-        this->compile(this->vertex_shader_path, GL_VERTEX_SHADER);
+        this->compile(vx_path, GL_VERTEX_SHADER);
     unsigned int fragment_shader =
-        this->compile(this->fragment_shader_path, GL_FRAGMENT_SHADER);
+        this->compile(fg_path, GL_FRAGMENT_SHADER);
 
     shader_program = glCreateProgram();
 
@@ -72,15 +72,21 @@ unsigned int Shader::compile(const char *shader_path, uint32_t type)
     return shader;
 }
 
-void Shader::setShaderUniform(std::string &name, bool value)
+void Shader::setShaderUniform(const char *name, bool value)
 {
-    glUniform1i(glGetUniformLocation(this->shader, name.c_str()), (int) value);
+    glUniform1i(glGetUniformLocation(this->shader, name), (int) value);
 }
-void Shader::setShaderUniform(std::string &name, float value)
+void Shader::setShaderUniform(const char *name, float value)
 {
-    glUniform1i(glGetUniformLocation(this->shader, name.c_str()), value);
+    glUniform1i(glGetUniformLocation(this->shader, name), value);
 }
-void Shader::setShaderUniform(std::string &name, int value)
+void Shader::setShaderUniform(const char *name, int value)
 {
-    glUniform1i(glGetUniformLocation(this->shader, name.c_str()), value);
+    glUniform1i(glGetUniformLocation(this->shader, name), value);
+}
+void Shader::setShaderUniform(const char *name, glm::mat4 value)
+{
+    glUniformMatrix4fv(
+        glGetUniformLocation(
+            this->shader, name), 1, GL_FALSE, glm::value_ptr(value));
 }
